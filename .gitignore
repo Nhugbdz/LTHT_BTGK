@@ -1,0 +1,13 @@
+# Bỏ qua thư mục chứa thư viện
+node_modules/
+
+# Bỏ qua file biến môi trường (CHỨA THÔNG TIN NHẠY CẢM)
+.env
+
+# Bỏ qua thư mục chứa ảnh upload
+public/uploads/
+
+# Bỏ qua file log và hệ điều hành
+*.log
+.DS_Store
+Thumbs.db

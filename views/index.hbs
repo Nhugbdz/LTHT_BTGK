@@ -1,0 +1,63 @@
+<h1>Danh Sách Sách</h1>
+
+<!-- CARD 1: FORM THÊM SÁCH -->
+<div class="card">
+    <h3 style="margin-bottom: 20px; color: #2c3e50;">Thêm Sách Mới</h3>
+    <!-- Lưu ý: enctype="multipart/form-data" là BẮT BUỘC để upload file -->
+    <form action="/add" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="maSach">Mã Sách (Phải bắt đầu bằng {{mssv}})</label>
+            <input type="text" id="maSach" name="maSach" placeholder="VD: 202-BK01" required>
+        </div>
+        <div class="form-group">
+            <label for="tenSach">Tên Sách</label>
+            <input type="text" id="tenSach" name="tenSach" placeholder="Nhập tên sách" required>
+        </div>
+        <div class="form-group">
+            <label for="giaGoc">Giá Gốc (VNĐ)</label>
+            <input type="number" id="giaGoc" name="giaGoc" placeholder="VD: 100000" required>
+        </div>
+        <div class="form-group">
+            <label for="image">Ảnh Bìa Sách</label>
+            <input type="file" id="image" name="image" accept="image/*">
+        </div>
+        <button type="submit" class="btn">Thêm Sách</button>
+    </form>
+</div>
+
+<!-- CARD 2: BẢNG DỮ LIỆU -->
+<div class="card">
+    <h3 style="margin-bottom: 20px; color: #2c3e50;">Kho Sách Hiện Có</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Ảnh</th>
+                <th>Mã Sách</th>
+                <th>Tên Sách</th>
+                <th>Giá Gốc</th>
+                <th>Giá Sau Thuế (VAT {{vatRate}}%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each books}}
+            <tr>
+                <td>
+                    {{#if this.image}}
+                        <img src="{{this.image}}" alt="Bìa sách" class="book-img">
+                    {{else}}
+                        <span style="color: #999; font-size: 12px;">Không có ảnh</span>
+                    {{/if}}
+                </td>
+                <td><strong>{{this.maSach}}</strong></td>
+                <td>{{this.tenSach}}</td>
+                <td>{{this.giaGoc}} đ</td>
+                <td style="color: #e74c3c; font-weight: 600;">{{this.giaSauThue}} đ</td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="5" style="text-align: center; color: #999; padding: 30px;">Chưa có dữ liệu. Hãy thêm sách mới!</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
